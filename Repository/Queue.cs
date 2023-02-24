@@ -61,6 +61,7 @@ namespace StorageAccount.Repository
                 msg=container.PeekMessages(2);
             }
             return msg;
+            
         }
         public static async Task UpdateMessage(string queueName,string data)
         {
@@ -68,7 +69,7 @@ namespace StorageAccount.Repository
             if(container.Exists())
             {
                 QueueMessage[] msg=container.ReceiveMessages();
-                container.UpdateMessage(msg[0].MessageId,msg[0].PopReceipt,data,TimeSpan.FromSeconds(180));
+                container.UpdateMessage(msg[0].MessageId,msg[0].PopReceipt,data,TimeSpan.FromSeconds(10));
             }
         }
         public static async Task DequeueMessage(string queueName)
